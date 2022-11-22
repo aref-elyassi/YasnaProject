@@ -26,6 +26,7 @@
                     </div>
                     <div class="border rounded bg-light px-3 text-danger article-like" @click="article.favoritesCount++"><i class="bi bi-suit-heart-fill "></i>{{article.favoritesCount}}</div>
                 </section>
+            
             </section>
         </div>
     </div>
