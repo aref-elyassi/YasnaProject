@@ -5,6 +5,16 @@ export default createStore({
   state: {
     articles: [],
     tags: [],
+    articleByTag:[],
+    comments:[
+      {id:1,body:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?',author:'Aref Elyassi'},
+      {id:2,body:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?',author:'Aref Elyassi'},
+      {id:3,body:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?',author:'Aref Elyassi'},
+      {id:4,body:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?',author:'Aref Elyassi'},
+      {id:5,body:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?',author:'Aref Elyassi'},
+      {id:6,body:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?',author:'Aref Elyassi'},
+      {id:7,body:'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?',author:'Aref Elyassi'},
+    ]
     
 
   },
@@ -17,9 +27,14 @@ export default createStore({
     },
     getArticleByTitle: (state) => (title) => {
       return state.articles.find(article => article.title == title)
-
   },
-   
+  getArticleByTag(state){
+    return state.articleByTag
+  },
+  getComments(state){
+    return state.comments
+  }
+
 
   },
   mutations: {
@@ -33,6 +48,22 @@ export default createStore({
     storeArticle(state, article) {
       state.articles.unshift(article)
     },
+    showArticleByTag(state,tag){
+     state.articles.forEach(element => 
+      element.tagList.filter((tags)=>{
+        if(tag===tags){
+          state.articleByTag=element
+          console.log(element);
+        }
+       
+       
+      })
+     )
+    },
+    // addComment(state,comment){
+    //   state.comments.unshift(comment)
+    //   console.log(comment);
+    // }
  
 
   },
@@ -41,7 +72,7 @@ export default createStore({
       try {
         const response = await axios.get('http://api.realworld.io/api/articles')
         commit('setArticles', response.data.articles)
-        console.log(response.data.articles);
+      
       }
       catch (error) {
         Swal.fire({
@@ -56,7 +87,7 @@ export default createStore({
       try{
         const response=await axios.get(`http://api.realworld.io/api/articles/${title}`)
         commit('fetchArticleByTitle',response.data)
-        console.log(response.data);
+       
       }
       catch (error) {
         Swal.fire({
@@ -71,7 +102,6 @@ export default createStore({
       try {
         const response = await axios.get('http://api.realworld.io/api/tags')
         commit('setTags', response.data.tags)
-        console.log(response.data.tags);
       }
       catch (error) {
         console.log(error);
@@ -105,6 +135,13 @@ export default createStore({
           confirmButtonText: "Ok",
         });
       }
+    },
+    showArticleByTag({commit},tag){
+      commit('showArticleByTag',tag)
+    },
+    addComment(context,comment){
+      console.log(comment);
+     context.state.comments.unshift(comment)
     }
 
   },

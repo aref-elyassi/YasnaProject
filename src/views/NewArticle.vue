@@ -49,7 +49,8 @@ export default {
         const ErrorArticles = ref('')
         const firstLogin = ref('')
         async function publish() {
-            if (article.value !== '' && articleSubject.value !== '' && articleText.value !== '' && tags.value !== '') {
+            if (article.value !== '' && articleSubject.value !== '' && articleText.value !== '' &&
+             tags.value !== '') {
                 if (localStorage.getItem('email') !== null && localStorage.getItem('password') !== null) {
                     await store.dispatch('storeArticle', article, articleSubject, articleText,tags)
                 }

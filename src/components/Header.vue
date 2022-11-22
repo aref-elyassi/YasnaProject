@@ -9,14 +9,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                   
-                    <router-link to="/"  class="nav-link">Home</router-link>
+
+                    <router-link to="/" class="nav-link">Home</router-link>
                     <router-link to="/login" class="nav-link">Login</router-link>
                     <router-link v-if="showNewArticle" to="/newArticle" class="nav-link">New Article</router-link>
-                    <router-link v-if="showNewArticle" to="/setting" class="nav-link">Setting</router-link>
-                    <p v-if="showEmail" class="showEmail nav-link">
-                        {{localName}}<i class="bi bi-emoji-smile"></i></p>
-                       
+                    <router-link v-if="showProfile" to="/setting" class="nav-link">Setting</router-link>
+                    <p v-if="showProfile" class="showEmail nav-link">
+                        {{ localName }}<i class="bi bi-emoji-smile"></i></p>
+
                     <p class="nav-link logOut" @click="logOut">LogOut</p>
                 </div>
             </div>
@@ -30,30 +30,30 @@ import { useRouter } from 'vue-router'
 export default {
     setup() {
         const router = useRouter()
-        const showNewArticle = ref(true)
-        const showEmail = ref(false)
-        const localName=ref(localStorage.getItem('name'))
+        const showNewArticle = ref(false)
+        const showProfile = ref(false)
+        const localName = ref(localStorage.getItem('name'))
         const localEmail = localStorage.getItem('email')
         const localPassword = localStorage.getItem('password')
-       
 
-            function logOut() {
-                localStorage.clear()
-                router.push({ path: '/login' });
-                console.log('aref');
-                showEmail.value = false
-            }
-            if (localEmail === '' && localPassword === '') {
-                showEmail.value = false
-              
-            }
-            else {
-                showEmail.value = true
-              
-            }
-      
-     
-        return { showNewArticle, showEmail, router, showEmail, showNewArticle, localEmail,localName ,logOut}
+
+        function logOut() {
+            showProfile.value = false
+            showNewArticle.value=false
+            router.push({ path: '/login' });
+            console.log('aref');
+        }
+        if (localEmail === '' && localPassword === '') {
+            showProfile.value = false
+
+        }
+        else {
+            showProfile.value = true
+
+        }
+
+
+        return { showProfile, showNewArticle, localEmail, localName, logOut }
     }
 }
 </script>

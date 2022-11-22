@@ -20,28 +20,51 @@
                     {{ article.body }}
                 </p>
                 <p>{{ article.description }}</p>
-                <section class="d-flex align-items-center justify-content-evenly">
+                <section class="d-flex align-items-center justify-content-between mt-5">
                     <div>
                         <span class="badge text-bg-primary m-1" v-for="tags in article.tagList">{{ tags }}</span>
                     </div>
-                    <div class="border rounded bg-light px-3 text-danger article-like" @click="article.favoritesCount++"><i class="bi bi-suit-heart-fill "></i>{{article.favoritesCount}}</div>
+                    <div class="border rounded bg-light px-3 text-danger article-like" @click="likeArticle"><i
+                            class="bi bi-suit-heart-fill "></i>{{ article.favoritesCount }}</div>
                 </section>
-            
+                <AddComment />
             </section>
         </div>
     </div>
 </template>
 
 <script>
-
+import AddComment from '@/components/AddComment.vue'
+import Swal from 'sweetalert2';
 export default {
-    props: ['article'],
+    props: ["article"],
+    components: {
+        AddComment
+    },
+    setup(props) {
+
+        function likeArticle() {
+            if (localStorage.hasOwnProperty("name") && localStorage.hasOwnProperty("email") &&
+                localStorage.hasOwnProperty("password")) {
+                props.article.favoritesCount++
+            }
+            else {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Please First Login Or Register To Like This Article",
+                    icon: "error",
+                    timer: 3000
+                });
+            }
+        }
+        return { likeArticle }
+    }
 
 }
 </script>
 
 <style  scoped>
-.article-like{
+.article-like {
     cursor: pointer;
 }
 </style>

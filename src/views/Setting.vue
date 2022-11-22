@@ -41,9 +41,7 @@ export default {
         const router = useRouter()
         const showPass = ref(true)
         const dontShow = ref(false)
-        const oldName = localStorage.getItem('name')
-        const oldPassword = localStorage.getItem('password')
-        const oldEmail = localStorage.getItem('email')
+       
         const emailRegister = ref('')
         const passwordRegister = ref('')
         const nameRegister = ref('')
