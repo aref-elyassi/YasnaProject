@@ -9,9 +9,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <router-link to="/" class="nav-link">Home</router-link>
+                   
+                    <router-link to="/"  class="nav-link">Home</router-link>
                     <router-link to="/login" class="nav-link">Login</router-link>
-                    <router-link to="/articles"  class="nav-link">Articles</router-link>
                     <router-link v-if="showNewArticle" to="/newArticle" class="nav-link">New Article</router-link>
                     <router-link v-if="showNewArticle" to="/setting" class="nav-link">Setting</router-link>
                     <p v-if="showEmail" class="showEmail nav-link">

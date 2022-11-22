@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Home from '@/views/Home.vue'
+
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import NewArticle from '@/views/NewArticle.vue'
@@ -10,7 +10,7 @@ import TemplateArticle from '@/views/Articles/TemplateArticle.vue'
 import ShowArticle from '@/views/Articles/ShowArticle.vue'
 import Setting from '@/views/Setting.vue'
   const routes= [
-   {path:'/',name:'Home',component:Home},
+   {path:'/',name:'Home',component:IndexArticle},
    {path:'/register',name:'Register',component:Register},
    {path:'/login',name:'Login',component:Login},
    {path:'/newArticle',name:'EnterArticle',component:NewArticle},

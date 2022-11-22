@@ -24,7 +24,7 @@
                     <div>
                         <span class="badge text-bg-primary m-1" v-for="tags in article.tagList">{{ tags }}</span>
                     </div>
-                    <div class="border rounded bg-light px-3 text-danger"><i class="bi bi-suit-heart-fill "></i>{{article.favoritesCount}}</div>
+                    <div class="border rounded bg-light px-3 text-danger article-like" @click="article.favoritesCount++"><i class="bi bi-suit-heart-fill "></i>{{article.favoritesCount}}</div>
                 </section>
             </section>
         </div>
@@ -40,5 +40,7 @@ export default {
 </script>
 
 <style  scoped>
-
+.article-like{
+    cursor: pointer;
+}
 </style>
