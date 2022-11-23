@@ -62,7 +62,7 @@ export default {
 
         function register() {
             if (emailRegister.value.toString() !== '' && nameRegister.value.toString() !== '' && passwordRegister.value.toString() !== '') {
-                store.dispatch('registerUser', formData.value)             
+                store.dispatch('registerUser', formData)             
                 router.push({ path: '/newArticle' });
             }
             else {

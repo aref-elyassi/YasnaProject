@@ -9,12 +9,12 @@
                 <div class="navbar-nav">
 
                     <router-link to="/" class="nav-link">Home</router-link>
-                    <router-link to="/login" class="nav-link">Login</router-link>
-                    <router-link  to="/newArticle" class="nav-link">New Article</router-link>
-                    <router-link  to="/setting" class="nav-link">Setting</router-link>
-                    <p v-if="showProfile" class="showEmail nav-link">
+                    <router-link to="/login" class="nav-link" v-if="!isAuthenticate">Login</router-link>
+                    <router-link  to="/newArticle" class="nav-link" v-if="isAuthenticate">New Article</router-link>
+                    <router-link  to="/setting" class="nav-link" v-if="isAuthenticate">Setting</router-link>
+                    <p v-if="isAuthenticate" class="showEmail nav-link">
                         {{ localName }}</p>
-                    <p class="nav-link logOut" @click="logOut">LogOut</p>
+                    <p class="nav-link logOut" @click="logOut" v-if="isAuthenticate">LogOut</p>
                 </div>
             </div>
         </div>
@@ -22,31 +22,28 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref,computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 export default {
      store:useStore(),
     setup() {
         const router = useRouter()
+        const store=useStore()
         const showProfile = ref(true)
         const localName = ref(localStorage.getItem('name'))
-        
+        const isAuthenticate=computed(()=>store.getters.isAuthenticated)
         function logOut() { 
-            localStorage.clear()
-            showProfile.value = false
+           isAuthenticate.value=true
+          
             router.push({ path: '/login' })
         }
       
     
    
-        return { showProfile,localName, logOut }
+        return { showProfile,localName, logOut,isAuthenticate }
     },
-    computed: {
-      auth () {
-        return store.getters.ifAuthenticated
-      }
-    },
+    
 }
 </script>
 

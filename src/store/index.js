@@ -46,8 +46,10 @@ export default createStore({
     },
     email(state) {
       return state.email
+    },
+    isAuthenticated(state){
+      return state.isAuthenticated
     }
-
 
 
   },
@@ -77,10 +79,12 @@ export default createStore({
       state.username = user.user_name
       state.email = user.email,
         state.token = user.token
-    },
-    setUserlogin(state,user){
-      state.email=user.email,
-      state.token=user.token
+      },
+      setUserlogin(state,user){
+        state.email=user.email,
+        state.token=user.token
+        state.isAuthenticated=true
+      
     }
 
 
@@ -167,24 +171,27 @@ export default createStore({
 
       const data = {
         user: {
-          user_name: payload.nameRegister,
-          email: payload.emailRegister,
-          password: payload.passwordRegister
+          user_name: payload.value.nameRegister,
+          email: payload.value.emailRegister,
+          password: payload.value.passwordRegister
         }
       }
       try {
         const response = await axios.post('https://conduit.productionready.io/api/users', data)
-        commit('setUserinfo', response.data.token)
-        localStorage.setItem('token', response.data.token)
-        console.log(response.data);
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Thanks For Register',
-          showConfirmButton: false,
-          timer: 2000
-        })
-        console.log(response.data);
+        if(response.status==200){
+          commit('setUserinfo', response.data.token)
+          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('email',response.data.email)
+          console.log(response.data);
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Thanks For Register',
+            showConfirmButton: false,
+            timer: 2000
+          })
+          console.log(response.data);
+        }
       }
       catch (error) {
         Swal.fire({
@@ -197,7 +204,6 @@ export default createStore({
       }
     },
     async loginUser({ commit }, payload) {
-
       const data = {
         user: {
        
@@ -212,7 +218,7 @@ export default createStore({
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Thanks For Register',
+          title: 'Thanks For Login',
           showConfirmButton: false,
           timer: 2000
         })

@@ -63,17 +63,9 @@ export default {
             }
         }
         function login() {
-            if (emailLogin.value.toString() !== '' && passwordLogin.value.toString() !== '') {
-                 
-                store.dispatch('loginUser', formData.value)   
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'You LogIn',
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
-                    router.push({ path: '/newArticle' });
+            if (emailLogin.value.toString() !== '' && passwordLogin.value.toString() !== '') { 
+                store.dispatch('loginUser',formData.value)   
+                router.push({ path: '/newArticle' });
             }
             else {
                 ErrorLogin.value = 'Please Fill All Items'
