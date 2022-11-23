@@ -23,20 +23,30 @@
 
 <script>
 import { ref } from 'vue'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 export default {
+     store:useStore(),
     setup() {
         const router = useRouter()
         const showProfile = ref(true)
         const localName = ref(localStorage.getItem('name'))
-      
+        
         function logOut() { 
             localStorage.clear()
             showProfile.value = false
             router.push({ path: '/login' })
         }
+      
+    
+   
         return { showProfile,localName, logOut }
-    }
+    },
+    computed: {
+      auth () {
+        return store.getters.ifAuthenticated
+      }
+    },
 }
 </script>
 

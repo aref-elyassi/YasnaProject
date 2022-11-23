@@ -1,41 +1,41 @@
 <template>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="d-flex align-items-center justify-content-center flex-column mt-2">
-                        <hr>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <h3>{{ articles.author.username }}</h3>
-                            <img class="rounded" :src="articles.author.image" alt="">
-                        </div>
-                        <small>{{ articles.createdAt }}</small>
-                    </div>
-                    <div class="card-body">
-                        <h1>Title</h1>
-                        <router-link class="router" :to="{name:'ShowArticle',params:{title:articles.title}}">{{articles.title}}></router-link>
-                       
-                        <hr>
-                        <h1>Body</h1>
-                        <p class="p" v-if="!readMoreActivated">{{ articles.body.slice(0, 100) }}
-                            <span class="text-primary" role="button" v-if="!readMoreActivated"
-                                @click="activateReadMore">..read more</span>
-                        </p>
-                        <p v-else>{{ articles.body }}</p>
-                        <div class="row d-flex align-items-center justify-content-between">
-                            <div class="listOfTags  col-md-8">
-                                <span class="badge text-bg-primary m-1"
-                                    v-for="tags in articles.tagList">{{ tags }}</span>
+        <div class="container-fluid">
+            <div class="row">
+                <div>
+                    <div class="card">
+                        <div class="d-flex align-items-center justify-content-center flex-column mt-2">
+                            <hr>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <h3>{{ articles.author.username }}</h3>
+                                <img class="rounded" :src="articles.author.image" alt="">
                             </div>
-                            <span class="addFavorite rounded border col-md-3  d-flex align-items-center justify-content-center">Add To Favorite Articles<i
-                                    class="bi bi-heart-fill"></i></span>
+                            <small>{{ articles.createdAt }}</small>
                         </div>
+                        <div class="card-body">
+                            <h1>Title</h1>
+                            <router-link class="router" :to="{name:'ShowArticle',params:{title:articles.title}}">{{articles.title}}></router-link>
+                        
+                            <hr>
+                            <h1>Body</h1>
+                            <p class="p" v-if="!readMoreActivated">{{ articles.body.slice(0, 100) }}
+                                <span class="text-primary" role="button" v-if="!readMoreActivated"
+                                    @click="activateReadMore">..read more</span>
+                            </p>
+                            <p v-else>{{ articles.body }}</p>
+                            <div class="row d-flex align-items-center justify-content-between">
+                                <div class="listOfTags  col-md-8">
+                                    <span class="badge text-bg-primary m-1"
+                                        v-for="tags in articles.tagList">{{ tags }}</span>
+                                </div>
+                                <span class="addFavorite rounded border col-md-3  d-flex align-items-center justify-content-center">Add To Favorite Articles<i
+                                        class="bi bi-heart-fill"></i></span>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>

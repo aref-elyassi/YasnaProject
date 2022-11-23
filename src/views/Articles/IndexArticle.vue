@@ -1,12 +1,11 @@
 <template>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-5">
-                <TagsComponent />
-            </div>
-            <div class="col-md-7">
-                <ArticlesComponent v-for="article in articles" :key="article.id" class="mt-2" :articles="article" />
-            </div>
+          
+            <TagsComponent />
+            <h1 class="text-center mt-4">All Articles</h1>
+            <hr>
+            <ArticlesComponent v-for="article in articles" :key="article.id" class="mt-2" :articles="article" />
         </div>
     </div>
     <p></p>

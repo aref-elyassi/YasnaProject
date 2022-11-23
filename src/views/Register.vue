@@ -22,7 +22,7 @@
                             <i class="bi bi-eye" v-if="showPass" @click="ShowHidePassword"></i>
                             <i class="bi bi-eye-slash" v-if="dontShow" @click="ShowHidePassword"></i>
                         </div>
-                        <h4 class="errorRegister text-center mt-4">{{ErrorRegister}}</h4>
+                        <h4 class="errorRegister text-center mt-4">{{ ErrorRegister }}</h4>
                     </div>
                     <button class="btn  w-100">Register</button>
                 </form>
@@ -32,10 +32,11 @@
 </template>
 
 <script>
-import { ref,onMounted } from 'vue'
+import { ref } from 'vue'
 import { createLocalStorage } from '@/module.js'
 import Swal from 'sweetalert2'
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
+import store from '@/store'
 export default {
     setup() {
         const router = useRouter()
@@ -44,6 +45,7 @@ export default {
         const emailRegister = ref('')
         const passwordRegister = ref('')
         const nameRegister = ref('')
+        const formData = ref({ nameRegister, emailRegister, passwordRegister })
         const ErrorRegister = ref('')
         function ShowHidePassword() {
             var x = document.querySelector(".myInput");
@@ -57,29 +59,23 @@ export default {
                 dontShow.value = false
             }
         }
-   
-       
-          function register() {
-              if (emailRegister.value.toString() !== '' && nameRegister.value.toString() !== '' && passwordRegister.value.toString() !== '') {
-                  createLocalStorage(nameRegister.value, emailRegister.value, passwordRegister.value)
-                  Swal.fire({
-                      position: 'center',
-                      icon: 'success',
-                    title: 'Thanks For Register',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
+
+
+        function register() {
+            if (emailRegister.value.toString() !== '' && nameRegister.value.toString() !== '' && passwordRegister.value.toString() !== '') {
+                store.dispatch('registerUser', formData)
+               
                 router.push({ path: '/newArticle' });
             }
             else {
                 ErrorRegister.value = 'Please Fill All Of Items'
             }
         }
-   
-    
-       
+
+
+
         return {
-            passwordRegister, nameRegister, emailRegister, ShowHidePassword, showPass, dontShow, ErrorRegister, createLocalStorage,register
+            passwordRegister, nameRegister, emailRegister, ShowHidePassword, showPass, dontShow, ErrorRegister, createLocalStorage, register
         }
     }
 }

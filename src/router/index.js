@@ -4,9 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import NewArticle from '@/views/NewArticle.vue'
-
 import IndexArticle from '@/views/Articles/IndexArticle.vue'
-import TemplateArticle from '@/views/Articles/TemplateArticle.vue'
+
 import ShowArticle from '@/views/Articles/ShowArticle.vue'
 import Setting from '@/views/Setting.vue'
 import ArticleByTags from '@/views/ArticleByTags.vue'
