@@ -3,9 +3,10 @@ import Swal from 'sweetalert2'
 import axios from 'axios'
 export default createStore({
   state: {
-    userName: '',
+    username: '',
     token: '',
     email: '',
+    isAuthenticated: false,
     articles: [],
     tags: [],
     articleByTag: [],
@@ -38,7 +39,7 @@ export default createStore({
       return state.comments
     },
     userName(state) {
-      return state.userName
+      return state.username
     },
     token(state) {
       return state.token
@@ -68,15 +69,20 @@ export default createStore({
             state.articleByTag = element
             console.log(element);
           }
-         
+
         })
       )
     },
     setUserinfo(state, user) {
-      state.userName = user.userName
-      state.email = user.email
-      state.token = user.token
+      state.username = user.user_name
+      state.email = user.email,
+        state.token = user.token
+    },
+    setUserlogin(state,user){
+      state.email=user.email,
+      state.token=user.token
     }
+
 
   },
   actions: {
@@ -158,9 +164,51 @@ export default createStore({
     },
 
     async registerUser({ commit }, payload) {
+
+      const data = {
+        user: {
+          user_name: payload.nameRegister,
+          email: payload.emailRegister,
+          password: payload.passwordRegister
+        }
+      }
       try {
-        const response = await axios.post('https://conduit.productionready.io/api/users/login', payload)
-        commit('setUserinfo', response.data)
+        const response = await axios.post('https://conduit.productionready.io/api/users', data)
+        commit('setUserinfo', response.data.token)
+        localStorage.setItem('token', response.data.token)
+        console.log(response.data);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Thanks For Register',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        console.log(response.data);
+      }
+      catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: "There is a problem, please try again",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
+        console.log(error.message);
+      }
+    },
+    async loginUser({ commit }, payload) {
+
+      const data = {
+        user: {
+       
+          email: payload.emailRegister,
+          password: payload.passwordRegister
+        }
+      }
+      try {
+        const response = await axios.post('https://conduit.productionready.io/api/users/login', data)
+        commit('setUserlogin', response.data.token)
+        console.log(response.data);
         Swal.fire({
           position: 'center',
           icon: 'success',

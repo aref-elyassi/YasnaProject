@@ -38,15 +38,16 @@
 <script>
 import { ref } from 'vue'
 import Swal from 'sweetalert2'
+import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 export default {
     setup() {
         const router = useRouter()
+        const store=useStore()
         const emailLogin = ref('')
         const ErrorLogin = ref('')
         const passwordLogin = ref('')
-        const localEmail = localStorage.getItem('email')
-        const localPassword = localStorage.getItem('password')
+        const formData = ref({ emailLogin, passwordLogin })
         const showPass = ref(true)
         const dontShow = ref(false)
         function ShowHidePassword() {
@@ -63,7 +64,8 @@ export default {
         }
         function login() {
             if (emailLogin.value.toString() !== '' && passwordLogin.value.toString() !== '') {
-                if (emailLogin.value.toString() === localEmail && passwordLogin.value.toString() === localPassword) {
+                 
+                store.dispatch('loginUser', formData.value)   
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
@@ -72,10 +74,6 @@ export default {
                         timer: 2000
                     })
                     router.push({ path: '/newArticle' });
-                }
-                else {
-                    ErrorLogin.value = 'Please Enter Correct Data Or Register'
-                }
             }
             else {
                 ErrorLogin.value = 'Please Fill All Items'

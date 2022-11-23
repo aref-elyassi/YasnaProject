@@ -60,20 +60,15 @@ export default {
             }
         }
 
-
         function register() {
             if (emailRegister.value.toString() !== '' && nameRegister.value.toString() !== '' && passwordRegister.value.toString() !== '') {
-                store.dispatch('registerUser', formData)
-               
+                store.dispatch('registerUser', formData.value)             
                 router.push({ path: '/newArticle' });
             }
             else {
                 ErrorRegister.value = 'Please Fill All Of Items'
             }
         }
-
-
-
         return {
             passwordRegister, nameRegister, emailRegister, ShowHidePassword, showPass, dontShow, ErrorRegister, createLocalStorage, register
         }
