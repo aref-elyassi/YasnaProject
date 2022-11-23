@@ -1,11 +1,12 @@
 <template>
     <div class="container mt-5">
         <div class="row">
-          
+
             <TagsComponent />
             <h1 class="text-center mt-4">All Articles</h1>
             <hr>
-            <ArticlesComponent v-for="article in articles" :key="article.id" class="mt-2" :articles="article" />
+            <ArticlesComponent v-for="article in articles" :key="article.id" class="mt-2" :articles="article"/>
+           
         </div>
     </div>
     <p></p>
@@ -24,6 +25,7 @@ export default {
         TagsComponent
     },
     setup() {
+      
         const store = useStore()
         const articles = computed(() => store.getters.allArticles)
         async function fetchArticles() {
@@ -32,8 +34,8 @@ export default {
         fetchArticles();
 
         return { articles }
-    }
-
+    },
+   
 }
 </script>
 

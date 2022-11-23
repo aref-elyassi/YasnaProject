@@ -159,7 +159,7 @@ export default createStore({
 
     async registerUser({ commit }, payload) {
       try {
-        const response = await axios.post('https://conduit.productionready.io/api/users/register', payload)
+        const response = await axios.post('https://conduit.productionready.io/api/users/login', payload)
         commit('setUserinfo', response.data)
         Swal.fire({
           position: 'center',
