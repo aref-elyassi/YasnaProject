@@ -51,7 +51,8 @@ export default {
         async function publish() {
             if (article.value !== '' && articleSubject.value !== '' && articleText.value !== '' &&
              tags.value !== '') {
-                if (localStorage.getItem('email') !== null && localStorage.getItem('password') !== null) {
+                if (localStorage.hasOwnProperty("name") && localStorage.hasOwnProperty("email") &&
+                    localStorage.hasOwnProperty("password")) {
                     await store.dispatch('storeArticle', article, articleSubject, articleText,tags)
                 }
                 else {

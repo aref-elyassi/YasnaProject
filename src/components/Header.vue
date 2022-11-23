@@ -1,6 +1,4 @@
 <template>
-
-
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -12,11 +10,10 @@
 
                     <router-link to="/" class="nav-link">Home</router-link>
                     <router-link to="/login" class="nav-link">Login</router-link>
-                    <router-link v-if="showNewArticle" to="/newArticle" class="nav-link">New Article</router-link>
-                    <router-link v-if="showProfile" to="/setting" class="nav-link">Setting</router-link>
+                    <router-link  to="/newArticle" class="nav-link">New Article</router-link>
+                    <router-link  to="/setting" class="nav-link">Setting</router-link>
                     <p v-if="showProfile" class="showEmail nav-link">
-                        {{ localName }}<i class="bi bi-emoji-smile"></i></p>
-
+                        {{ localName }}</p>
                     <p class="nav-link logOut" @click="logOut">LogOut</p>
                 </div>
             </div>
@@ -30,30 +27,15 @@ import { useRouter } from 'vue-router'
 export default {
     setup() {
         const router = useRouter()
-        const showNewArticle = ref(false)
-        const showProfile = ref(false)
+        const showProfile = ref(true)
         const localName = ref(localStorage.getItem('name'))
-        const localEmail = localStorage.getItem('email')
-        const localPassword = localStorage.getItem('password')
-
-
-        function logOut() {
+      
+        function logOut() { 
+            localStorage.clear()
             showProfile.value = false
-            showNewArticle.value=false
-            router.push({ path: '/login' });
-            console.log('aref');
+            router.push({ path: '/login' })
         }
-        if (localEmail === '' && localPassword === '') {
-            showProfile.value = false
-
-        }
-        else {
-            showProfile.value = true
-
-        }
-
-
-        return { showProfile, showNewArticle, localEmail, localName, logOut }
+        return { showProfile,localName, logOut }
     }
 }
 </script>

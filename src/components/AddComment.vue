@@ -33,7 +33,8 @@ export default {
         const obj=ref({localName,articleText})
         const comments = computed(() => store.getters.getComments)
         function addComment() {
-            if (localStorage.hasOwnProperty("name")) {
+            if (localStorage.hasOwnProperty("name") && localStorage.hasOwnProperty("email") &&
+            localStorage.hasOwnProperty("password")) {
                 store.dispatch('addComment', obj)
             }
             else {

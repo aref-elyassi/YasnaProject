@@ -10,22 +10,20 @@ import TemplateArticle from '@/views/Articles/TemplateArticle.vue'
 import ShowArticle from '@/views/Articles/ShowArticle.vue'
 import Setting from '@/views/Setting.vue'
 import ArticleByTags from '@/views/ArticleByTags.vue'
-  const routes= [
-   {path:'/',name:'Home',component:IndexArticle},
-   {path:'/register',name:'Register',component:Register},
-   {path:'/login',name:'Login',component:Login},
-   {path:'/newArticle',name:'EnterArticle',component:NewArticle},
-   {path:'/articles',name:'TemplateArticle',component:TemplateArticle,children:[
-     {path:'',name:'IndexArticles',component:IndexArticle},
-     {path:':title',name:'ShowArticle',component:ShowArticle}
-   ]},
-   {path:'/setting',name:'Setting',component:Setting},
-   {path:'/articleByTag',name:'ArticleByTags',component:ArticleByTags}
+const routes = [
+  { path: '/', name: 'Home', component: IndexArticle },
+  { path: '/register', name: 'Register', component: Register },
+  { path: '/login', name: 'Login', component: Login },
+  { path: '/newArticle', name: 'EnterArticle', component: NewArticle },
+  { path: '/articles', name: 'IndexArticle', component: IndexArticle },
+  { path: '/articles/:title', name: 'ShowArticle', component: ShowArticle },
+  { path: '/setting', name: 'Setting', component: Setting },
+  { path: '/articleByTag', name: 'ArticleByTags', component: ArticleByTags }
 
-  ]
-  const router = createRouter({
-    history: createWebHistory(),
-    routes
-  })
+]
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
 
 export default router

@@ -63,7 +63,7 @@ export default {
         }
         function login() {
             if (emailLogin.value.toString() !== '' && passwordLogin.value.toString() !== '') {
-                if (emailLogin.value.toString() == localEmail && passwordLogin.value.toString() == localPassword) {
+                if (emailLogin.value.toString() === localEmail && passwordLogin.value.toString() === localPassword) {
                     Swal.fire({
                         position: 'center',
                         icon: 'success',
