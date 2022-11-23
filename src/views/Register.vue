@@ -34,7 +34,6 @@
 <script>
 import { ref } from 'vue'
 import { createLocalStorage } from '@/module.js'
-import Swal from 'sweetalert2'
 import { useRouter } from 'vue-router'
 import store from '@/store'
 export default {
@@ -60,15 +59,21 @@ export default {
             }
         }
 
+
         function register() {
             if (emailRegister.value.toString() !== '' && nameRegister.value.toString() !== '' && passwordRegister.value.toString() !== '') {
-                store.dispatch('registerUser', formData)             
+                const registerResult = store.dispatch('registerUser', formData)
+              registerResult.then(() => {
                 router.push({ path: '/newArticle' });
+              }) 
             }
             else {
                 ErrorRegister.value = 'Please Fill All Of Items'
             }
         }
+
+
+
         return {
             passwordRegister, nameRegister, emailRegister, ShowHidePassword, showPass, dontShow, ErrorRegister, createLocalStorage, register
         }

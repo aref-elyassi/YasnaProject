@@ -3,11 +3,11 @@ import Swal from 'sweetalert2'
 import axios from 'axios'
 export default createStore({
   state: {
-    username: '',
+    userName: '',
     token: '',
     email: '',
-    isAuthenticated: false,
     articles: [],
+    isAuthenticated: false,
     tags: [],
     articleByTag: [],
     comments: [
@@ -39,7 +39,7 @@ export default createStore({
       return state.comments
     },
     userName(state) {
-      return state.username
+      return state.userName
     },
     token(state) {
       return state.token
@@ -47,11 +47,9 @@ export default createStore({
     email(state) {
       return state.email
     },
-    isAuthenticated(state){
-      return state.isAuthenticated
-    }
-
-
+    isAuthenticated(state) {
+      return state.isAuthenticated || localStorage.getItem('token')
+    },
   },
   mutations: {
     setArticles(state, articles) {
@@ -76,18 +74,15 @@ export default createStore({
       )
     },
     setUserinfo(state, user) {
-      state.username = user.user_name
-      state.email = user.email,
-        state.token = user.token
-      },
-      setUserlogin(state,user){
-        state.email=user.email,
-        state.token=user.token
-        state.isAuthenticated=true
-      
-    }
-
-
+      state.userName = user.username
+      state.email = user.email
+      state.token = user.token
+      localStorage.setItem('token', user.token)
+      localStorage.setItem('email', user.email)
+    },
+    setAuthenticationState(state, status) {
+      state.isAuthenticated = status
+    },
   },
   actions: {
 
@@ -168,30 +163,26 @@ export default createStore({
     },
 
     async registerUser({ commit }, payload) {
-
       const data = {
         user: {
-          user_name: payload.value.nameRegister,
           email: payload.value.emailRegister,
-          password: payload.value.passwordRegister
+          password: payload.value.passwordRegister,
+          username: payload.value.nameRegister,
         }
       }
       try {
         const response = await axios.post('https://conduit.productionready.io/api/users', data)
-        if(response.status==200){
-          commit('setUserinfo', response.data.token)
-          localStorage.setItem('token', response.data.token)
-          localStorage.setItem('email',response.data.email)
-          console.log(response.data);
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Thanks For Register',
-            showConfirmButton: false,
-            timer: 2000
-          })
-          console.log(response.data);
-        }
+        commit('setUserinfo', response.data.user)
+        commit('setAuthenticationState', !!response.data.user.token)
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Thanks For Register',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        console.log(response.data);
+        return true
       }
       catch (error) {
         Swal.fire({
@@ -203,26 +194,20 @@ export default createStore({
         console.log(error.message);
       }
     },
+
     async loginUser({ commit }, payload) {
       const data = {
         user: {
-       
-          email: payload.emailRegister,
-          password: payload.passwordRegister
+          password: payload.value.passwordRegister,
+          username: payload.value.nameRegister,
         }
       }
       try {
         const response = await axios.post('https://conduit.productionready.io/api/users/login', data)
-        commit('setUserlogin', response.data.token)
+        commit('setUserinfo', response.data.user)
+        commit('setAuthenticationState', !!response.data.token)
         console.log(response.data);
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Thanks For Login',
-          showConfirmButton: false,
-          timer: 2000
-        })
-        console.log(response.data);
+        return true
       }
       catch (error) {
         Swal.fire({

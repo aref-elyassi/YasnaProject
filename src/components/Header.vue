@@ -7,14 +7,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-
                     <router-link to="/" class="nav-link">Home</router-link>
-                    <router-link to="/login" class="nav-link" v-if="!isAuthenticate">Login</router-link>
-                    <router-link  to="/newArticle" class="nav-link" v-if="isAuthenticate">New Article</router-link>
-                    <router-link  to="/setting" class="nav-link" v-if="isAuthenticate">Setting</router-link>
-                    <p v-if="isAuthenticate" class="showEmail nav-link">
+                    <router-link v-if="!isAuthenticated" to="/login" class="nav-link">
+                        Login</router-link>
+                    <p v-if="isAuthenticated" class="nav-link logOut" @click="logOut">LogOut</p>
+                    <router-link to="/newArticle" class="nav-link" v-if="isAuthenticated">New Article</router-link>
+                    <router-link to="/setting" class="nav-link" v-if="isAuthenticated">Setting</router-link>
+                    <p v-if="isAuthenticated" class="showEmail nav-link">
                         {{ localName }}</p>
-                    <p class="nav-link logOut" @click="logOut" v-if="isAuthenticate">LogOut</p>
                 </div>
             </div>
         </div>
@@ -22,28 +22,26 @@
 </template>
 
 <script>
-import { ref,computed } from 'vue'
-import { useStore } from 'vuex'
+import { mapGetters, useStore } from 'vuex'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+
 export default {
-     store:useStore(),
     setup() {
+        const store = useStore()
         const router = useRouter()
-        const store=useStore()
         const showProfile = ref(true)
-        const localName = ref(localStorage.getItem('name'))
-        const isAuthenticate=computed(()=>store.getters.isAuthenticated)
-        function logOut() { 
-           isAuthenticate.value=true
-          
+        const localName = ref(localStorage.getItem('email'))
+        var isAuthenticated = computed(() => store.getters.isAuthenticated)
+        function logOut() {
+            isAuthenticated = false
             router.push({ path: '/login' })
         }
-      
-    
-   
-        return { showProfile,localName, logOut,isAuthenticate }
+        return { showProfile, localName, logOut, isAuthenticated }
     },
-    
+    computed: {
+        ...mapGetters({ isAuthenticated: 'isAuthenticated' })
+    },
 }
 </script>
 

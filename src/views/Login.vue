@@ -37,7 +37,6 @@
 
 <script>
 import { ref } from 'vue'
-import Swal from 'sweetalert2'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 export default {
@@ -64,7 +63,7 @@ export default {
         }
         function login() {
             if (emailLogin.value.toString() !== '' && passwordLogin.value.toString() !== '') { 
-                store.dispatch('loginUser',formData.value)   
+                store.dispatch('loginUser',formData)   
                 router.push({ path: '/newArticle' });
             }
             else {
