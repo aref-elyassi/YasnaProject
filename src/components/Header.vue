@@ -49,7 +49,7 @@ export default {
 
 <style  scoped>
 .navbar {
-    background-color: #1A374D;
+    background-color: #256D85;
 }
 
 .nav-link {

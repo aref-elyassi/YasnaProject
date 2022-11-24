@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid d-flex justify-content-center mt-4">
         <div class="row w-100 d-flex  justify-content-center ">
-            <div class="col-md-6 col-sm-12 login-form border rounded p-3">
+            <div class="col-md-6 col-sm-12 login-form border rounded p-3 text-secondary">
                 <h1 class="text-center">Login Form</h1>
                 <form @submit.prevent="login">
                     <div class="mb-3">
@@ -84,7 +84,8 @@ export default {
 
 <style scoped>
 .login-form {
-    background: #406882;
+    background: #2B4865;
+  
 }
 
 .router {

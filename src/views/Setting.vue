@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid d-flex  justify-content-center mt-4">
+    <div class="container-fluid d-flex  justify-content-center mt-4 text-secondary">
         <div class="row w-100  justify-content-center">
             <div class="col-md-6 col-sm-12 register-form border rounded p-3">
                 <h1 class="text-center">Change Account</h1>
@@ -76,7 +76,7 @@ export default {
 
 <style  scoped>
 .register-form {
-    background: #406882;
+    background: #2B4865;
 }
 
 .pass {

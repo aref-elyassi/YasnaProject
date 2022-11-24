@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid d-flex align-items-center justify-content-center">
+    <div class="container-fluid d-flex align-items-center justify-content-center text-secondary">
         <form @submit.prevent="publish"
             class="row w-80 d-flex align-items-center justify-content-center col-md-6 col-sm-12 login-form border rounded p-3 h-50 mt-4">
             <h4 class="errorArticle text-center mt-4">{{firstLogin}}</h4>
@@ -77,7 +77,7 @@ export default {
 
 <style  scoped>
 .login-form {
-    background: #406882;
+    background: #2B4865;
 }
 
 .btn {
