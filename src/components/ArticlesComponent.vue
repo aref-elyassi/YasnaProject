@@ -27,8 +27,7 @@
                                     <span class="badge text-bg-primary m-1"
                                         v-for="tags in articles.tagList">{{ tags }}</span>
                                 </div>
-                                <span class="addFavorite rounded border col-md-3  d-flex align-items-center justify-content-center">Add To Favorite Articles<i
-                                        class="bi bi-heart-fill"></i></span>
+                                
                             </div>
 
                         </div>

@@ -45,15 +45,14 @@ export default {
         const articleSubject = ref('')
         const articleText = ref('')
         const tags = ref('')
-       
+       const articleAdded=ref({article,articleSubject,articleText,tags})
         const ErrorArticles = ref('')
         const firstLogin = ref('')
-        async function publish() {
+         function publish() {
             if (article.value !== '' && articleSubject.value !== '' && articleText.value !== '' &&
              tags.value !== '') {
-                if (localStorage.hasOwnProperty("name") && localStorage.hasOwnProperty("email") &&
-                    localStorage.hasOwnProperty("password")) {
-                    await store.dispatch('storeArticle', article, articleSubject, articleText,tags)
+                if (localStorage.hasOwnProperty("token") ) {
+                     store.dispatch('storeArticle', articleAdded)
                 }
                 else {
                     Swal.fire({

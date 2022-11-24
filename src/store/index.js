@@ -10,14 +10,15 @@ export default createStore({
     isAuthenticated: false,
     tags: [],
     articleByTag: [],
+     currentDate : new Date().toJSON().slice(0, 10),
     comments: [
-      { id: 1, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi' },
-      { id: 2, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi' },
-      { id: 3, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi' },
-      { id: 4, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi' },
-      { id: 5, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi' },
-      { id: 6, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi' },
-      { id: 7, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi' },
+      { id: 1, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi',time:'2022-11-20'  },
+      { id: 2, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi',time:'2022-11-19' },
+      { id: 3, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi',time:'2022-11-18'  },
+      { id: 4, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi',time:'2022-11-17'  },
+      { id: 5, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi',time:'2022-11-16' },
+      { id: 6, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi',time:'2022-11-15'  },
+      { id: 7, body: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Earum impedit deleniti consectetur? Provident, omnis earum nam facilis minus est unde iusto odit quasi temporibus culpa sed dolores tempore totam inventore, illo dolorum repellendus. Voluptatibus sequi ad deleniti deserunt, tempore ratione quia molestias earum ducimus nulla tenetur cum ea repellendus id?', author: 'Aref Elyassi',time:'2022-11-14' },
     ]
 
 
@@ -79,10 +80,20 @@ export default createStore({
       state.token = user.token
       localStorage.setItem('token', user.token)
       localStorage.setItem('email', user.email)
+      localStorage.setItem('name', user.username)
     },
     setAuthenticationState(state, status) {
       state.isAuthenticated = status
     },
+    logOutUser(){
+      localStorage.clear()
+    },
+    changeUserinfo(state,user){
+      state.userName=user.username
+      localStorage.setItem('name', user.username)
+      state.email=localStorage.getItem('email')
+      state.token=localStorage.getItem('token')
+    }
   },
   actions: {
 
@@ -126,14 +137,17 @@ export default createStore({
       }
     },
 
-    async storeArticle({ commit }, title, about, body, tags) {
+    async storeArticle({ commit }, payload) {
+      const data = {
+        myarticle: {
+          title: payload.value.article,
+          description: payload.value.articleSubject,
+          body: payload.value.articleText,
+          tags:payload.value.tags
+        }
+      }
       try {
-        const response = await axios.get('http://api.realworld.io/api/articles', {
-          title: title,
-          description: about,
-          body: body,
-          tagList: tags
-        })
+        const response = await axios.get('http://api.realworld.io/api/articles', data)
         commit('storeArticle', response.data.articles)
         Swal.fire({
           title: "Article added",
@@ -158,68 +172,113 @@ export default createStore({
       commit('showArticleByTag', tag)
     },
     addComment(context, comment) {
-      console.log(comment);
-      context.state.comments.unshift(comment)
+      //const commentLength = context.state.comments.length
+      context.state.comments.unshift({
+        id: comment.length,
+        body: comment.value.articleText,
+        author: comment.value.localName,
+        time:new Date().toJSON().slice(0, 10)
+      })
     },
+ 
 
-    async registerUser({ commit }, payload) {
-      const data = {
-        user: {
-          email: payload.value.emailRegister,
-          password: payload.value.passwordRegister,
-          username: payload.value.nameRegister,
-        }
-      }
-      try {
-        const response = await axios.post('https://conduit.productionready.io/api/users', data)
-        commit('setUserinfo', response.data.user)
-        commit('setAuthenticationState', !!response.data.user.token)
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Thanks For Register',
-          showConfirmButton: false,
-          timer: 2000
-        })
-        console.log(response.data);
-        return true
-      }
-      catch (error) {
-        Swal.fire({
-          title: "Error!",
-          text: "There is a problem, please try again",
-          icon: "error",
-          confirmButtonText: "Ok",
-        });
-        console.log(error.message);
-      }
-    },
-
-    async loginUser({ commit }, payload) {
-      const data = {
-        user: {
-          password: payload.value.passwordRegister,
-          username: payload.value.nameRegister,
-        }
-      }
-      try {
-        const response = await axios.post('https://conduit.productionready.io/api/users/login', data)
-        commit('setUserinfo', response.data.user)
-        commit('setAuthenticationState', !!response.data.token)
-        console.log(response.data);
-        return true
-      }
-      catch (error) {
-        Swal.fire({
-          title: "Error!",
-          text: "There is a problem, please try again",
-          icon: "error",
-          confirmButtonText: "Ok",
-        });
-        console.log(error.message);
+  async registerUser({ commit }, payload) {
+    const data = {
+      user: {
+        username: payload.value.nameRegister,
+        email: payload.value.emailRegister,
+        password: payload.value.passwordRegister,
       }
     }
+    try {
+      const response = await axios.post('https://conduit.productionready.io/api/users', data)
+      commit('setUserinfo', response.data.user)
+      commit('setAuthenticationState', !!response.data.user.token)
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Thanks For Register',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      console.log(response.data);
+      return true
+    }
+    catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: "There is a problem, please try again",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      console.log(error.message);
+    }
   },
-  modules: {
+  async changeSetting({ commit }, payload) {
+    const data = {
+      changeuser: {
+        username: payload.value.nameChange,
+      
+        password: payload.value.passwordChange,
+      }
+    }
+    try {
+      const response = await axios.post('https://conduit.productionready.io/api/users', data)
+      commit('changeUserinfo', response.data.changeuser)
+      //commit('setAuthenticationState', !!response.data.user.token)
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Thanks For Change',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      console.log(response.data);
+      return true
+    }
+    catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: "There is a problem in change, please try again",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      console.log(error.message);
+    }
+  },
+
+
+  async loginUser({ commit }, payload) {
+    const data = {
+      user: {
+        password: payload.value.passwordLogin,
+        email: payload.value.emailLogin,
+      }
+    }
+    try {
+      const response = await axios.post('https://conduit.productionready.io/api/users/login', data)
+      commit('setUserinfo', response.data.user)
+      commit('setAuthenticationState', !!response.data.user.token)
+      console.log(response.data);
+      return true
+    }
+    catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: "There is a problem, please try again",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      console.log(error.message);
+    }
+  },
+  logOutUser({commit}){
+    commit('logOutUser')
   }
+},
+
+
+
+  modules: {
+}
 })

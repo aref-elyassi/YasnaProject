@@ -10,11 +10,11 @@
                     <router-link to="/" class="nav-link">Home</router-link>
                     <router-link v-if="!isAuthenticated" to="/login" class="nav-link">
                         Login</router-link>
-                    <p v-if="isAuthenticated" class="nav-link logOut" @click="logOut">LogOut</p>
-                    <router-link to="/newArticle" class="nav-link" v-if="isAuthenticated">New Article</router-link>
-                    <router-link to="/setting" class="nav-link" v-if="isAuthenticated">Setting</router-link>
-                    <p v-if="isAuthenticated" class="showEmail nav-link">
-                        {{ localName }}</p>
+                        <router-link to="/newArticle" class="nav-link" v-if="isAuthenticated">New Article</router-link>
+                        <router-link to="/setting" class="nav-link" v-if="isAuthenticated">Setting</router-link>
+                        <p v-if="isAuthenticated" class="showEmail nav-link">
+                            {{ localName }}</p>
+                            <p v-if="isAuthenticated" class="nav-link logOut" @click="logOut">LogOut</p>
                 </div>
             </div>
         </div>
@@ -34,8 +34,10 @@ export default {
         const localName = ref(localStorage.getItem('email'))
         var isAuthenticated = computed(() => store.getters.isAuthenticated)
         function logOut() {
-            isAuthenticated = false
-            router.push({ path: '/login' })
+           store.dispatch('logOutUser')
+           //window.location.reload();
+            router.push({ name: 'Home' })
+            router.go()
         }
         return { showProfile, localName, logOut, isAuthenticated }
     },

@@ -33,9 +33,9 @@ export default {
         const obj=ref({localName,articleText})
         const comments = computed(() => store.getters.getComments)
         function addComment() {
-            if (localStorage.hasOwnProperty("name") && localStorage.hasOwnProperty("email") &&
-            localStorage.hasOwnProperty("password")) {
+            if ( localStorage.hasOwnProperty("token")) {
                 store.dispatch('addComment', obj)
+                console.log(obj.value);
             }
             else {
                 Swal.fire({

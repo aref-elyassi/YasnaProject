@@ -3,22 +3,17 @@
         <div class="row w-100  justify-content-center">
             <div class="col-md-6 col-sm-12 register-form border rounded p-3">
                 <h1 class="text-center">Change Account</h1>
-                <form @submit.prevent="register">
+                <form @submit.prevent="change">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Name</label>
                         <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="John Doe"
-                            v-model="nameRegister">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput2" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput2"
-                            placeholder="name@example.com" v-model="emailRegister">
+                            v-model="nameChange">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput4" class="form-label">Password </label>
                         <div class="pass">
                             <input type="password" class="form-control myInput" id="exampleFormControlInput4"
-                                v-model="passwordRegister">
+                                v-model="passwordChange">
                             <i class="bi bi-eye" v-if="showPass" @click="ShowHidePassword"></i>
                             <i class="bi bi-eye-slash" v-if="dontShow" @click="ShowHidePassword"></i>
                         </div>
@@ -33,7 +28,6 @@
 
 <script>
 import { ref } from 'vue'
-import { createLocalStorage } from '@/module.js'
 import { useRouter } from 'vue-router'
 import store from '@/store'
 export default {
@@ -41,10 +35,10 @@ export default {
         const router = useRouter()
         const showPass = ref(true)
         const dontShow = ref(false)
-        const emailRegister = ref('')
-        const passwordRegister = ref('')
-        const nameRegister = ref('')
-        const formData = ref({ nameRegister, emailRegister, passwordRegister })
+      
+        const passwordChange = ref('')
+        const nameChange = ref('')
+        const formData = ref({ nameChange,  passwordChange })
         const ErrorRegister = ref('')
         function ShowHidePassword() {
             var x = document.querySelector(".myInput");
@@ -60,12 +54,13 @@ export default {
         }
 
 
-        function register() {
-            if (emailRegister.value.toString() !== '' && nameRegister.value.toString() !== '' && passwordRegister.value.toString() !== '') {
-                const registerResult = store.dispatch('registerUser', formData)
-              registerResult.then(() => {
-                router.push({ path: '/newArticle' });
-              }) 
+        function change() {
+            if ( nameChange.value!== '' && passwordChange.value.toString() !== '') {
+                const registerResult = store.dispatch('changeSetting', formData)
+                registerResult.then(() => {
+                    router.push({ name: 'Home' });
+                   
+                })
             }
             else {
                 ErrorRegister.value = 'Please Fill All Of Items'
@@ -75,7 +70,7 @@ export default {
 
 
         return {
-            passwordRegister, nameRegister, emailRegister, ShowHidePassword, showPass, dontShow, ErrorRegister, createLocalStorage, register
+            passwordChange, nameChange,ShowHidePassword, showPass, dontShow, ErrorRegister, change
         }
     }
 }

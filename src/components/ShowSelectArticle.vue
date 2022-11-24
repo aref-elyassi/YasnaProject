@@ -44,8 +44,7 @@ export default {
     setup(props) {
 
         function likeArticle() {
-            if (localStorage.hasOwnProperty("name") && localStorage.hasOwnProperty("email") &&
-                localStorage.hasOwnProperty("password")) {
+            if (localStorage.hasOwnProperty("token") ) {
                 props.article.favoritesCount++
             }
             else {

@@ -58,13 +58,13 @@ export default {
                 dontShow.value = false
             }
         }
-
-
         function register() {
-            if (emailRegister.value.toString() !== '' && nameRegister.value.toString() !== '' && passwordRegister.value.toString() !== '') {
+            if (emailRegister.value.toString() !== '' && nameRegister.value !== '' && 
+            passwordRegister.value.toString() !== '') {
                 const registerResult = store.dispatch('registerUser', formData)
               registerResult.then(() => {
-                router.push({ path: '/newArticle' });
+                router.push({ name: 'Home' });
+               // router.go()
               }) 
             }
             else {

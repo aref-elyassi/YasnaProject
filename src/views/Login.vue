@@ -63,8 +63,13 @@ export default {
         }
         function login() {
             if (emailLogin.value.toString() !== '' && passwordLogin.value.toString() !== '') { 
-                store.dispatch('loginUser',formData)   
-                router.push({ path: '/newArticle' });
+                const loginResult=store.dispatch('loginUser',formData)  
+                loginResult.then((res)=>{
+                    if(res){
+                        router.push({ name: 'Home' });
+                        router.go()
+                    }
+                }) 
             }
             else {
                 ErrorLogin.value = 'Please Fill All Items'

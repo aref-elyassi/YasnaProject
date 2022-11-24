@@ -4,6 +4,7 @@
             <div class="col-md-10 p-3">
                 <h4>Author: {{comments.author}}</h4>
                 <p>{{comments.body}}</p>
+                <p>{{comments.time}}</p>
             </div>
         </div>
     </div>
