@@ -63,11 +63,11 @@ export default {
         }
         function login() {
             if (emailLogin.value.toString() !== '' && passwordLogin.value.toString() !== '') { 
-                const loginResult=store.dispatch('loginUser',formData)  
+                const loginResult=store.dispatch('users/loginUser',formData)  
                 loginResult.then((res)=>{
                     if(res){
-                        router.push({ name: 'Home' });
-                        router.go()
+                        window.location.reload()
+                        router.push({ path: '/' });
                     }
                 }) 
             }

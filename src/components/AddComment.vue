@@ -31,21 +31,30 @@ export default {
         const articleText = ref("");
         const localName = localStorage.getItem('name')
         const obj=ref({localName,articleText})
-        const comments = computed(() => store.getters.getComments)
+        const comments = computed(() => store.getters['articles/getComments'])
         function addComment() {
-            if ( localStorage.hasOwnProperty("token")) {
-                store.dispatch('addComment', obj)
-                console.log(obj.value);
-            }
-            else {
+            if(articleText.value===''){
                 Swal.fire({
+                    title: "Error!",
+                    text: "Please Fill Text Area",
+                    icon: "error",
+                    confirmButtonText: "Ok",
+                    timer: 3000
+                });
+            }
+           else if ( localStorage.hasOwnProperty("token") && articleText.value!=='') {
+                store.dispatch('articles/addComment', obj)
+               
+            }
+             else {
+                 Swal.fire({
                     title: "Error!",
                     text: "Please First Login Or Register",
                     icon: "error",
                     confirmButtonText: "Ok",
                     timer: 3000
                 });
-            }
+             }
         }
         return { comments, addComment, articleText }
     },

@@ -3,13 +3,15 @@
         <div class="row">
             <section class="col-md-12 rounded border mt-2 p-3">
                 <section class="d-flex align-items-center justify-content-around">
-                    <section class="d-flex">
-                        <h3>
-                            {{ article.author.username }}
-                        </h3>
+                   
+                    <p class="col-md-6 col-sm-12">Created At:{{ article.createdAt }}</p>
+                    <div class="author d-flex">
+
+                        <h5 class="col-md-6 col-sm-12">
+                            {{article.author.username}}
+                        </h5>
                         <img :src=article.author.image alt="" class="rounded">
-                    </section>
-                    <p>Created At:{{ article.createdAt }}</p>
+                    </div>
                 </section>
 
                 <h5 class="mt-3 bg-info p-3 rounded text-justify">
@@ -36,13 +38,19 @@
 <script>
 import AddComment from '@/components/AddComment.vue'
 import Swal from 'sweetalert2';
+
 export default {
-    props: ["article"],
+    props: {
+    article: {
+      type: Object,
+      default: () => {},
+    },
+  },
     components: {
         AddComment
     },
     setup(props) {
-
+      
         function likeArticle() {
             if (localStorage.hasOwnProperty("token") ) {
                 props.article.favoritesCount++

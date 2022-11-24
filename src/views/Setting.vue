@@ -9,6 +9,7 @@
                         <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="John Doe"
                             v-model="nameChange">
                     </div>
+                 
                     <div class="mb-3">
                         <label for="exampleFormControlInput4" class="form-label">Password </label>
                         <div class="pass">
@@ -35,9 +36,9 @@ export default {
         const router = useRouter()
         const showPass = ref(true)
         const dontShow = ref(false)
-      
         const passwordChange = ref('')
         const nameChange = ref('')
+      
         const formData = ref({ nameChange,  passwordChange })
         const ErrorRegister = ref('')
         function ShowHidePassword() {
@@ -52,14 +53,11 @@ export default {
                 dontShow.value = false
             }
         }
-
-
         function change() {
             if ( nameChange.value!== '' && passwordChange.value.toString() !== '') {
-                const registerResult = store.dispatch('changeSetting', formData)
+                const registerResult = store.dispatch('users/changeSetting', formData)
                 registerResult.then(() => {
-                    router.push({ name: 'Home' });
-                   
+                    router.push({ path: '/' });
                 })
             }
             else {

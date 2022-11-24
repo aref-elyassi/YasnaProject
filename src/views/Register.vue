@@ -9,6 +9,7 @@
                         <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="John Doe"
                             v-model="nameRegister">
                     </div>
+                    
                     <div class="mb-3">
                         <label for="exampleFormControlInput2" class="form-label">Email</label>
                         <input type="email" class="form-control" id="exampleFormControlInput2"
@@ -61,9 +62,9 @@ export default {
         function register() {
             if (emailRegister.value.toString() !== '' && nameRegister.value !== '' && 
             passwordRegister.value.toString() !== '') {
-                const registerResult = store.dispatch('registerUser', formData)
+                const registerResult = store.dispatch('users/registerUser', formData)
               registerResult.then(() => {
-                router.push({ name: 'Home' });
+                router.push({ path: '/' });
                // router.go()
               }) 
             }

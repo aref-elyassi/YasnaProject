@@ -32,17 +32,17 @@ export default {
         const router = useRouter()
         const showProfile = ref(true)
         const localName = ref(localStorage.getItem('email'))
-        var isAuthenticated = computed(() => store.getters.isAuthenticated)
+        //var isAuthenticated = computed(() => store.getters.isAuthenticated)
         function logOut() {
-           store.dispatch('logOutUser')
-           //window.location.reload();
-            router.push({ name: 'Home' })
-            router.go()
+          store.dispatch('users/logOutUser').then(()=>{
+              window.location.reload()
+              router.push({path:'/'})
+          })
         }
-        return { showProfile, localName, logOut, isAuthenticated }
+        return { showProfile, localName, logOut }
     },
     computed: {
-        ...mapGetters({ isAuthenticated: 'isAuthenticated' })
+        ...mapGetters({ isAuthenticated: 'users/isAuthenticated' })
     },
 }
 </script>

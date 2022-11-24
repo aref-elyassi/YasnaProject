@@ -52,7 +52,7 @@ export default {
             if (article.value !== '' && articleSubject.value !== '' && articleText.value !== '' &&
              tags.value !== '') {
                 if (localStorage.hasOwnProperty("token") ) {
-                     store.dispatch('storeArticle', articleAdded)
+                     store.dispatch('articles/storeArticle', articleAdded)
                 }
                 else {
                     Swal.fire({

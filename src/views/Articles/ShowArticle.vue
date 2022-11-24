@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ShowSelectArticle :article="article"/>
+      <ShowSelectArticle :article="articleByTitle"/>
     </div>
 </template>
 
@@ -9,18 +9,24 @@
        
 
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { useRoute } from 'vue-router'
 import ShowSelectArticle from '@/components/ShowSelectArticle.vue'
 export default {
-    setup() {
-        const store = useStore()
-        const router=useRoute()
-        const article = computed(() => store.getters.getArticleByTitle(router.params.title))
-        return{article}
-    },
 
-    components: { ShowSelectArticle }
+    components: { ShowSelectArticle },
+    computed: {
+        ...mapGetters({ articleByTitle: 'articles/articleByTitle' })
+    },
+  created() {
+    this.fetchArticles().then(() => {
+      this.getArticleByTitle(this.$route.params.title)
+    })
+  },
+    methods: {
+        ...mapMutations({ getArticleByTitle: 'articles/getArticleByTitle' }),
+        ...mapActions({ fetchArticles: 'articles/fetchArticles' })
+    },
 } 
     
 </script>

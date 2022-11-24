@@ -27,9 +27,9 @@ export default {
     setup() {
       
         const store = useStore()
-        const articles = computed(() => store.getters.allArticles)
+        const articles = computed(() => store.getters['articles/allArticles'])
         async function fetchArticles() {
-            await store.dispatch("fetchArticles");
+            await store.dispatch("articles/fetchArticles");
         }
         fetchArticles();
 

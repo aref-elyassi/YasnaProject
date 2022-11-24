@@ -25,6 +25,7 @@
                             <p class="text-justify">
                                 {{ articleByTags.body }}
                             </p>
+                            
                             <p>{{ articleByTags.description }}</p>
                             <section class="d-flex align-items-center justify-content-between mt-5">
                                 <div>
@@ -38,6 +39,7 @@
                         </section>
                     </div>
                 </div>
+               
             </section>
         </div>
 
@@ -54,22 +56,25 @@ export default {
     setup() {
         const showHideComponent = ref(false)
         const store = useStore()
-        const tags = computed(() => store.getters.allTags)
-        const articleByTags = computed(() => store.getters.getArticleByTag)
+        const tags = computed(() => store.getters['articles/allTags'])
+        const selectTag=computed(()=>store.getters['articles/getTagsByArticle'])
+        const articleByTags = computed(() => store.getters['articles/getArticleByTag'])
         async function fetchTags() {
-            await store.dispatch('fetchAllTags');
+            await store.dispatch('articles/fetchAllTags');
         }
 
         function showArticlesByTags(tag) {
-            if (tag !== '') {
-                showHideComponent.value = true
+            if (tag !== null) {
+                showHideComponent.value = true   
+                store.dispatch('articles/showArticleByTag', tag)
+                console.log(selectTag);
             }
-            console.log(tag);
-            store.dispatch('showArticleByTag', tag)
+           
+         
         }
         fetchTags();
 
-        return { fetchTags, showArticlesByTags, tags, articleByTags, showHideComponent }
+        return { fetchTags, showArticlesByTags, tags, articleByTags, showHideComponent,selectTag }
     },
 
 
